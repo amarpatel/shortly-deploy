@@ -28,3 +28,8 @@ results
 
 npm-debug.log
 node_modules
+
+###production files###
+public/dist/app_concat.min.js
+public/dist/style.min.css
+public/dist/app_concat.js
