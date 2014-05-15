@@ -18,11 +18,11 @@ module.exports = function(grunt) {
       }
     },
 
-    nodemon: {
-      dev: {
-        script: 'server.js'
-      }
-    },
+    // nodemon: {
+    //   dev: {
+    //     script: 'server.js'
+    //   }
+    // },
 
     uglify: {
       build: {
@@ -74,6 +74,7 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
+        command : 'git push azure master'
       }
     }
   });
@@ -85,21 +86,29 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
-  grunt.loadNpmTasks('grunt-nodemon');
+  // grunt.loadNpmTasks('grunt-nodemon');
 
-  grunt.registerTask('server-dev', function (target) {
+  // grunt.registerTask('server-dev', function (target) {
+  //   // Running nodejs in a different process and displaying output on the main console
+  //   var nodemon = grunt.util.spawn({
+  //        cmd: 'grunt',
+  //        grunt: true
+  //        ,args: 'nodemon'
+  //   });
+  //   nodemon.stdout.pipe(process.stdout);
+  //   nodemon.stderr.pipe(process.stderr);
+
+  //   grunt.task.run([ 'watch' ]);
+  // });
+
+
+  grunt.registerTask('server-prod', function (target) {
     // Running nodejs in a different process and displaying output on the main console
-    var nodemon = grunt.util.spawn({
-         cmd: 'grunt',
-         grunt: true,
-         args: 'nodemon'
-    });
-    nodemon.stdout.pipe(process.stdout);
-    nodemon.stderr.pipe(process.stderr);
 
-    grunt.task.run([ 'watch' ]);
+    grunt.task.run([ 'build' ]);
+    grunt.task.run([ 'test' ]);
+    grunt.task.run([ 'shell' ]);
   });
-
   ////////////////////////////////////////////////////
   // Main grunt tasks
   ////////////////////////////////////////////////////
@@ -109,16 +118,19 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'jshint',
     'concat',
     'uglify',
-    'jshint'
-
+    'cssmin'
   ]);
 
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
+      grunt.log.write('prod')
       // add your production server task here
+      grunt.task.run([ 'server-prod' ]);
     } else {
+      grunt.log.write('dev')
       grunt.task.run([ 'server-dev' ]);
     }
   });
@@ -127,9 +139,8 @@ module.exports = function(grunt) {
     // add your deploy tasks here
   ]);
 
-  grunt.registerTask('default',
-    ['concat']
-  );
+  grunt.registerTask('default',[
+  ]);
 
 
 };

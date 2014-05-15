@@ -11,14 +11,14 @@ var Link = require('../app/models/link');
 // NOTE: these tests are designed for mongo!
 /////////////////////////////////////////////////////
 
-xdescribe('', function() {
+describe('', function() {
 
   beforeEach(function(done) {
     // Log out currently signed in user
     request(app)
       .get('/logout')
       .end(function(err, res) {
-
+        // debugger;
         // Delete objects from db so they can be created later for the test
         Link.remove({url : 'http://www.roflzoo.com/'}).exec();
         User.remove({username : 'Savannah'}).exec();
