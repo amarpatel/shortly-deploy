@@ -52,9 +52,9 @@ users.pre('validate', function (next) {
 });
 
 // Instantiate models
+exports.Link = mongoose.model('Link', links);
+exports.User = mongoose.model('User', users);
 
-var Link = mongoose.model('Link', links);
-var User = mongoose.model('User', users);
 
 
 

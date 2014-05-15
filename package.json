@@ -28,6 +28,7 @@
     "minimatch": "^0.3.0",
     "mocha": "^1.17.1",
     "mongoose": "^3.8.9",
+    "mongoose-bluebird-utils": "0.0.9",
     "request": "^2.34.0",
     "sqlite3": "~2.2.0"
   },
