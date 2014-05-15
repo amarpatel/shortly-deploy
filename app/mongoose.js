@@ -3,7 +3,9 @@ var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/test');
+var ip = process.env.mongo || 'mongodb://localhost/test';
+
+mongoose.connect(ip);
 
 var Schema = mongoose.Schema;
 
