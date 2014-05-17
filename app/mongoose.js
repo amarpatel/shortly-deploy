@@ -16,7 +16,7 @@ var links = new Schema({
   base_url: String,
   code: String,
   title: String,
-  visits: Number,
+  visits: {type: Number, default: 0},
 }, {id: true});
 
 var users = new Schema({
